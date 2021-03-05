@@ -30,14 +30,17 @@ $(document).ready(function() {
         let currentPath = pathRef;
         let pathToArray = currentPath.split("/");
         $('#nav').html('');
-        for(i=0; i<pathToArray.length; i++){
-            $('#nav').append('<button id="'+ pathToArray[i]+'" class="btn-nav">' + pathToArray[i] + '</button>');
+        for(i=1; i<pathToArray.length; i++){
+            $('#nav').append('<button id="'+ i +'" class="btn-nav">' + pathToArray[i] + '</button>');
         }
         $('.btn-nav').click(function() {
-            let currentPath = pathRef;
-            console.log(currentPath);
-            console.log(pathToArray);
-            console.log(this.id);
+            let index = parseInt(this.id);
+            let cutArray = pathToArray.slice(0,(index+1));
+            let newPath = cutArray.join("/");
+            console.log(newPath);
+            pathRef=newPath;
+            getFiles(newPath + "/");
+            generateNav(); 
         })
     }
 
